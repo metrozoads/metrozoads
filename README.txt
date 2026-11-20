@@ -1,12 +1,12 @@
 METROZO ADS – NEW WEBSITE (Design 3E · Growth Story)
 =====================================================
 
-FILES
------
+FILES (ellaam ore folder-la, sub-folder illa)
+---------------------------------------------
 index.html            -> main page (ellaa sections-um idhula irukku)
-assets/css/style.css  -> design / colors / fonts (Montserrat)
-assets/js/main.js     -> animations, service chart, industry videos, WhatsApp form
-assets/img/logo.webp  -> Metrozo logo
+style.css             -> design / colors / fonts (Montserrat)
+main.js               -> animations, service chart, industry videos, WhatsApp form
+logo.webp             -> Metrozo logo
 .htaccess             -> pazhaya links redirect (cPanel / BigRock hosting-ku)
 vercel.json           -> adhe redirects Vercel-ku (/careers, /industry/...)
 
@@ -24,7 +24,7 @@ CASE A – BigRock hosting (cPanel):
  4. BACKUP: public_html-la irukka ellaa files-um select -> "Compress" -> zip download pannikonga.
  5. Pazhaya files ellaam delete pannunga.
  6. "Upload" -> indha zip file-a upload pannunga -> zip-a right click -> "Extract".
- 7. "metrozo-ads-website" folder-kulla irukka ELLAA files-um (index.html, assets, .htaccess)
+ 7. "metrozo-ads-website" folder-kulla irukka ELLAA files-um (index.html, style.css, main.js, logo.webp, .htaccess)
     select panni "Move" -> /public_html  (index.html nerla public_html-la irukkanum).
     (.htaccess theriyalana: File Manager -> Settings -> "Show Hidden Files" tick pannunga.)
  8. https://www.metrozoads.com open pannunga. Pazhaya site theriyudhuna Ctrl+F5.
@@ -38,12 +38,12 @@ CASE B – Vera hosting (Vercel / Netlify / Hostinger / ...):
 
 CHANGES PANNA (simple edits)
 ----------------------------
-- Phone / WhatsApp number: assets/js/main.js -> "const WA='916380650947'" + index.html-la tel: links.
-- Industry videos (Instagram reels): assets/js/main.js -> "const VIDEOS={" -> reel ID add / remove pannunga.
+- Phone / WhatsApp number: main.js -> "const WA='916380650947'" + index.html-la tel: links.
+- Industry videos (Instagram reels): main.js -> "const VIDEOS={" -> reel ID add / remove pannunga.
   Example link: https://www.instagram.com/reel/Dd3cYRgDUww/  -> ID = Dd3cYRgDUww
 - Clients names: main.js -> "const INDUSTRIES=[" list.
 - Jobs: main.js -> "const JOBS=[" list.
 - Services details: main.js -> "const SERVICES=[" list.
-- Logo maathanum-na: assets/img/logo.webp file-a replace pannunga (adhe peru).
+- Logo maathanum-na: logo.webp file-a replace pannunga (adhe peru).
 
 NOTE: Fonts (Montserrat) Google Fonts-la irundhu load aagum – internet thevai.
