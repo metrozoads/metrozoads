@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/careers", "destination": "/#careers", "permanent": true },
+    { "source": "/industry/:slug*", "destination": "/#industries", "permanent": true }
+  ]
+}
