@@ -255,6 +255,12 @@ section{scroll-margin-top:72px}
 .f-social a:hover{background:var(--accent)}
 .f-social svg{width:18px;height:18px;fill:#fff}
 
+.contact-solo{grid-template-columns:1fr!important;max-width:680px;margin-left:auto;margin-right:auto}
+.f-grid a.f-loc{display:flex!important;gap:8px;align-items:flex-start;line-height:1.55;margin-top:6px}
+.f-grid a.f-loc .ico{margin-top:4px;flex-shrink:0}
+.f-grid a.f-loc u{color:var(--accent);text-decoration:none;font-weight:600}
+.f-grid a.f-loc:hover u{text-decoration:underline}
+
 /* ===== THEME: 3E · Growth Story (scroll-driven storytelling) ===== */
 :root{--bg:#ffffff;--bg2:#f7f7f5;--text:#101010;--muted:#626262;--accent:#f16d21;--grad:linear-gradient(120deg,#f16d21,#ff9a3d);
  --card:#ffffff;--line:#ececec;--line-strong:#d9d9d9;--radius:28px;--font-head:Montserrat,sans-serif;--font-body:Montserrat,sans-serif;

@@ -40,6 +40,8 @@ const IC={
  'play-s':'<polygon points="7 4 20 12 7 20 7 4" fill="currentColor"/>',
  home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/>',
  plug:'<path d="M12 22v-5"/><path d="M9 8V2M15 8V2"/><path d="M18 8v5a6 6 0 0 1-12 0V8Z"/>',
+ tooth:'<path d="M12 5.5C10.5 4 8.8 3 7 3 4.2 3 3 5.3 3 7.5c0 2.6 1 4.3 1.6 6.6.5 2 .8 4.3 1.4 5.9.4 1 1.4 1.3 2 .3.9-1.6 1.1-4.3 2.2-5.6.6-.7 1-.7 1.6 0 1.1 1.3 1.3 4 2.2 5.6.6 1 1.6.7 2-.3.6-1.6.9-3.9 1.4-5.9.6-2.3 1.6-4 1.6-6.6C21 5.3 19.8 3 17 3c-1.8 0-3.5 1-5 2.5Z"/>',
+ tractor:'<circle cx="7" cy="16" r="4"/><circle cx="18" cy="18" r="2"/><path d="M3 13V7h6l2 5h5l1-3h3v7"/><path d="M11 12v6M16 18h-5"/><path d="M5 7V4h4"/>',
  check:'<path d="M20 6 9 17l-5-5"/>',
  arrow:'<path d="M5 12h14M12 5l7 7-7 7"/>',
  hand:'<path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-6-2.4l-3.6-3.6a2 2 0 0 1 2.8-2.8L7 15"/>'
@@ -75,13 +77,12 @@ const INDUSTRIES=[
  ["cart","Super Markets","Local reach ads and offer-based campaigns to increase daily footfall.",["Apple Super Market","Balaji Oils","Imayam Super Market","Paalam Super Market"]],
  ["bike","Bike Showrooms","Test-ride leads and seasonal sales campaigns.",["Bawa Honda","Majestic Motors"]],
  ["cap","Education Centers","Admission-focused strategies for schools, colleges & institutes.",["Green Apple Computer Education","SIP Abacus","Veranda Race"]],
- ["bed","Hotels","Booking-driven marketing and visibility boost for hotels and lodges.",["Annamithra","Melba"]],
- ["utensils","Restaurants","Online orders, local reach ads and brand visibility.",[]],
+ ["utensils","Restaurants / Hotels","Online orders, table & room bookings, local reach ads and brand visibility.",["Annamithra","Melba"]],
  ["building","Residency","Room booking and long-stay enquiry campaigns.",[]],
  ["heart","Marriage Halls","Event-based lead generation and seasonal booking strategies.",["S S Mahal"]],
  ["sofa","Furniture Showrooms","Product-focused ads and showroom visit campaigns.",["New National"]],
  ["sparkles","Beauty Parlour","Local ads and online booking support.",["Aari Zone","Abhaya","Rakshitha Parlour"]],
- ["tv","Electronics Shop","Product promotion and local customer reach.",["Power LED"]],
+ ["tv","Electrical Shop","Product promotion and local customer reach for electrical shops.",["Power LED"]],
  ["wrench","Hardware Shop","Lead generation and local visibility.",[]],
  ["hardhat","Construction","Project leads and brand promotion for builders.",[]],
  ["home","Real Estate","Plot and property enquiry campaigns for real estate developers.",[]],
@@ -90,7 +91,9 @@ const INDUSTRIES=[
  ["laptop","Computer Showroom","Product marketing and local sales growth.",[]],
  ["car","Car Showroom","Test-drive leads and showroom visit campaigns.",[]],
  ["grid","Tiles Showroom","Customer leads and product promotion.",["Mahalingam Tiles Showroom"]],
- ["book","School","Admission-focused digital marketing for schools.",["Igen Pre School"]]
+ ["book","School / College","Admission-focused digital marketing for schools and colleges.",["Igen Pre School"]],
+ ["tooth","Dental Clinic","Patient enquiries, appointment bookings and local Google visibility for dental clinics.",[]],
+ ["tractor","Agriculture Machinery & Equipments","Farmer leads, dealer promotions and seasonal offer campaigns for agri machinery.",[]]
 ];
 const IG_PROFILE='https://www.instagram.com/metrozoads/';
 const rl=id=>`https://www.instagram.com/reel/${id}/`;
@@ -99,15 +102,14 @@ const VIDEOS={
  "Textile":[["Textile","Dd3cYRgDUww"],["Textile","DcbEQcyly9o"],["Textile","DbdeZYBj9RC"],["Boutique","DccwCZhjXq3"],["Boutique","DXWrvyDiBgD"]],
  "Jewellery":[["Jewellery","Deg9oocAQdG"],["Jewellery","DfOui7nDNm-"],["Jewellery","DfmfJJNCCJ9"],["Jewellery","DSH9wEnkZ-R"],["Jewellery","DYzAwXblbhx"]],
  "Super Markets":[["Supermarket","DfKe7lvEr3W"],["Supermarket","DeRqNi1iAyu"],["Supermarket","DcgN4n-gYSV"],["Supermarket","DYpDgtxgUVP"],["Supermarket","DRW_OaTCc45"],["Supermarket","DaiFhqXl3PL"]],
- "Education Centers":[["Abacus centre","DcdrdgqT_B7"],["Abacus centre","DaAknLckQ5f"],["College","DLj5ucEAQlb"],["College","DLbrXUTgXEr"],["College","DLCsoBHAQsJ"],["Computer education","DeyK8wTDVTE"],["Computer education","DW_lK0CiGLP"],["Computer education","DZKgwHaimRr"]],
- "Restaurants":[["Restaurant","DcLne9OEyI4"],["Restaurant","DWRGwE7CAUP"],["Restaurant","DfPT40ACVwK"],["Restaurant","DclXfTmgF9M"]],
+ "Education Centers":[["Abacus centre","DcdrdgqT_B7"],["Abacus centre","DaAknLckQ5f"],["Computer education","DeyK8wTDVTE"],["Computer education","DW_lK0CiGLP"],["Computer education","DZKgwHaimRr"]],
+ "Restaurants / Hotels":[["Restaurant","DcLne9OEyI4"],["Restaurant","DWRGwE7CAUP"],["Restaurant","DfPT40ACVwK"],["Restaurant","DclXfTmgF9M"]],
  "Residency":[["Residency","DfCaeiXFe0I"],["Residency","De4TGflDMTQ"],["Residency","DfcNVjQmdhH"]],
  "Furniture Showrooms":[["Furniture","DaaUpVuAoiw"],["Furniture","DZgtUelgu86"],["Furniture","Da45fnpFff-"],["Furniture","DY1y_yjAkuI"]],
- "Electronics Shop":[["Electronics","DezIAxYjyVg"],["Electronics","De9WeZBjobI"]],
  "Real Estate":[["Real estate","DdwM2O7jUP3"],["Real estate","DXg_oAfjQyC"]],
- "Home Appliances & Retail":[["Home appliances","DWd-l14j1h5"],["Home appliances","DbVTWGoFOy6"],["Home appliances","DeJ2jPXj5sI"]],
+ "Home Appliances & Retail":[["Home appliances","DWd-l14j1h5"],["Home appliances","DbVTWGoFOy6"],["Home appliances","DeJ2jPXj5sI"],["Electronics","DezIAxYjyVg"],["Electronics","De9WeZBjobI"]],
  "Tiles Showroom":[["Tiles showroom","DMxbR3NAzRG"]],
- "School":[["School","Df6RnvPvVEs"],["School","DdA7zKqzxMB"],["School","DdeTXbFgO10"],["School","DQeEQp0jDQi"],["School","DPGx0W3gECW"]]
+ "School / College":[["School","Df6RnvPvVEs"],["School","DdA7zKqzxMB"],["School","DdeTXbFgO10"],["School","DQeEQp0jDQi"],["School","DPGx0W3gECW"],["College","DLj5ucEAQlb"],["College","DLbrXUTgXEr"],["College","DLCsoBHAQsJ"]]
 };
 const JOBS=[
  ["Video Editor","3 Seats","Premiere Pro, After Effects, DaVinci Resolve, Avid"],
