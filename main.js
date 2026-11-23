@@ -38,6 +38,8 @@ const IC={
  users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
  send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
  'play-s':'<polygon points="7 4 20 12 7 20 7 4" fill="currentColor"/>',
+ home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/>',
+ plug:'<path d="M12 22v-5"/><path d="M9 8V2M15 8V2"/><path d="M18 8v5a6 6 0 0 1-12 0V8Z"/>',
  check:'<path d="M20 6 9 17l-5-5"/>',
  arrow:'<path d="M5 12h14M12 5l7 7-7 7"/>',
  hand:'<path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-6-2.4l-3.6-3.6a2 2 0 0 1 2.8-2.8L7 15"/>'
@@ -82,6 +84,8 @@ const INDUSTRIES=[
  ["tv","Electronics Shop","Product promotion and local customer reach.",["Power LED"]],
  ["wrench","Hardware Shop","Lead generation and local visibility.",[]],
  ["hardhat","Construction","Project leads and brand promotion for builders.",[]],
+ ["home","Real Estate","Plot and property enquiry campaigns for real estate developers.",[]],
+ ["plug","Home Appliances & Retail","Festive offers and sales campaigns for appliance & retail stores.",[]],
  ["lamp","Interior Designs","Client leads and online promotion for interior designers.",[]],
  ["laptop","Computer Showroom","Product marketing and local sales growth.",[]],
  ["car","Car Showroom","Test-drive leads and showroom visit campaigns.",[]],
@@ -93,8 +97,17 @@ const rl=id=>`https://www.instagram.com/reel/${id}/`;
 const thumbSrc=id=>(window.THUMBS&&window.THUMBS[id])||('reel-'+id+'.jpg');
 const VIDEOS={
  "Textile":[["Textile","Dd3cYRgDUww"],["Textile","DcbEQcyly9o"],["Textile","DbdeZYBj9RC"],["Boutique","DccwCZhjXq3"],["Boutique","DXWrvyDiBgD"]],
- "Education Centers":[["Abacus centre","DcdrdgqT_B7"],["Abacus centre","DaAknLckQ5f"]],
- "Restaurants":[["Restaurant","DcLne9OEyI4"],["Restaurant","DWRGwE7CAUP"],["Restaurant","DfPT40ACVwK"],["Restaurant","DclXfTmgF9M"]]
+ "Jewellery":[["Jewellery","Deg9oocAQdG"],["Jewellery","DfOui7nDNm-"],["Jewellery","DfmfJJNCCJ9"],["Jewellery","DSH9wEnkZ-R"],["Jewellery","DYzAwXblbhx"]],
+ "Super Markets":[["Supermarket","DfKe7lvEr3W"],["Supermarket","DeRqNi1iAyu"],["Supermarket","DcgN4n-gYSV"],["Supermarket","DYpDgtxgUVP"],["Supermarket","DRW_OaTCc45"],["Supermarket","DaiFhqXl3PL"]],
+ "Education Centers":[["Abacus centre","DcdrdgqT_B7"],["Abacus centre","DaAknLckQ5f"],["College","DLj5ucEAQlb"],["College","DLbrXUTgXEr"],["College","DLCsoBHAQsJ"],["Computer education","DeyK8wTDVTE"],["Computer education","DW_lK0CiGLP"],["Computer education","DZKgwHaimRr"]],
+ "Restaurants":[["Restaurant","DcLne9OEyI4"],["Restaurant","DWRGwE7CAUP"],["Restaurant","DfPT40ACVwK"],["Restaurant","DclXfTmgF9M"]],
+ "Residency":[["Residency","DfCaeiXFe0I"],["Residency","De4TGflDMTQ"],["Residency","DfcNVjQmdhH"]],
+ "Furniture Showrooms":[["Furniture","DaaUpVuAoiw"],["Furniture","DZgtUelgu86"],["Furniture","Da45fnpFff-"],["Furniture","DY1y_yjAkuI"]],
+ "Electronics Shop":[["Electronics","DezIAxYjyVg"],["Electronics","De9WeZBjobI"]],
+ "Real Estate":[["Real estate","DdwM2O7jUP3"],["Real estate","DXg_oAfjQyC"]],
+ "Home Appliances & Retail":[["Home appliances","DWd-l14j1h5"],["Home appliances","DbVTWGoFOy6"],["Home appliances","DeJ2jPXj5sI"]],
+ "Tiles Showroom":[["Tiles showroom","DMxbR3NAzRG"]],
+ "School":[["School","Df6RnvPvVEs"],["School","DdA7zKqzxMB"],["School","DdeTXbFgO10"],["School","DQeEQp0jDQi"],["School","DPGx0W3gECW"]]
 };
 const JOBS=[
  ["Video Editor","3 Seats","Premiere Pro, After Effects, DaVinci Resolve, Avid"],
@@ -107,7 +120,7 @@ const waLink=t=>`https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
 const $=id=>document.getElementById(id);
 
 /* ---- render lists ---- */
-$('indWrap').innerHTML=INDUSTRIES.map((d,i)=>{const v=VIDEOS[d[1]]||[];return `<button class="ind reveal d${i%4}" data-i="${i}">${v.length?`<span class="cnt">${ic('play-s')}${v.length} videos</span>`:d[3].length?`<span class="cnt">${d[3].length} client${d[3].length>1?'s':''}</span>`:''}<span class="em">${ic(d[0])}</span><h4>${d[1]}</h4><p>${d[2]}</p><span class="more">${v.length?'Watch our work':'View details'} ${ic('arrow')}</span></button>`}).join('');
+$('indWrap').innerHTML=INDUSTRIES.map((d,i)=>{const v=VIDEOS[d[1]]||[];return `<button class="ind reveal d${i%4}" data-i="${i}">${v.length?`<span class="cnt">${ic('play-s')}${v.length} video${v.length>1?"s":""}</span>`:d[3].length?`<span class="cnt">${d[3].length} client${d[3].length>1?'s':''}</span>`:''}<span class="em">${ic(d[0])}</span><h4>${d[1]}</h4><p>${d[2]}</p><span class="more">${v.length?'Watch our work':'View details'} ${ic('arrow')}</span></button>`}).join('');
 $('jobs').innerHTML=JOBS.map((j,i)=>`<div class="job reveal d${i%4}"><h4>${j[0]}</h4><div class="meta"><span>${j[1]}</span><span>Age 18–25</span></div><p><b>Skills:</b> ${j[2]}</p><a href="${waLink('Hi Metrozo Ads, I want to apply for the '+j[0]+' job.')}" target="_blank" rel="noopener">${wa()} Apply via WhatsApp</a></div>`).join('');
 $('fb').innerHTML=INDUSTRIES.map(d=>`<option>${d[1]}</option>`).join('')+'<option>Other</option>';
 $('fs').innerHTML=SERVICES.map(s=>`<option>${s.name}</option>`).join('');
