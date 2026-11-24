@@ -53,6 +53,7 @@ function wa(cls){return `<svg class="ico ${cls||''}" viewBox="0 0 24 24" fill="c
 function igI(cls){return `<svg class="ico ${cls||''}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${IG_PATH}</svg>`}
 /* replace [data-ic] placeholders in static HTML */
 function hydrateIcons(root){(root||document).querySelectorAll('[data-ic]').forEach(el=>{const n=el.dataset.ic;el.innerHTML=n==='wa'?wa():n==='ig'?igI():ic(n);el.removeAttribute('data-ic')})}
+function fbI(cls){return `<svg class="ico ${cls||''}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8V6c0-.9.6-1.1 1-1.1h2.6V1h-3.6C10 1 9.2 3.9 9.2 5.8V8H7v4h2.2v11H14V12h3.3l.4-4z"/></svg>`}
 
 hydrateIcons();
 /* ===== METROZO ADS – shared data & behaviour ===== */
@@ -96,10 +97,11 @@ const INDUSTRIES=[
  ["tractor","Agriculture Machinery & Equipments","Farmer leads, dealer promotions and seasonal offer campaigns for agri machinery.",[]]
 ];
 const IG_PROFILE='https://www.instagram.com/metrozoads/';
-const rl=id=>`https://www.instagram.com/reel/${id}/`;
-const thumbSrc=id=>(window.THUMBS&&window.THUMBS[id])||('reel-'+id+'.jpg');
+const rl=id=>id.startsWith('http')?id:`https://www.instagram.com/reel/${id}/`;
+const isFB=id=>id.includes('facebook.com');
+const thumbSrc=id=>id.startsWith('http')?'':((window.THUMBS&&window.THUMBS[id])||('reel-'+id+'.jpg'));
 const VIDEOS={
- "Textile":[["Textile","Dd3cYRgDUww"],["Textile","DcbEQcyly9o"],["Textile","DbdeZYBj9RC"],["Boutique","DccwCZhjXq3"],["Boutique","DXWrvyDiBgD"]],
+ "Textile":[["Textile","DHnGkR3Brkq"],["Textile","Dd3cYRgDUww"],["Textile","DcbEQcyly9o"],["Textile","DbdeZYBj9RC"],["Boutique","DccwCZhjXq3"],["Boutique","DXWrvyDiBgD"]],
  "Jewellery":[["Jewellery","Deg9oocAQdG"],["Jewellery","DfOui7nDNm-"],["Jewellery","DfmfJJNCCJ9"],["Jewellery","DSH9wEnkZ-R"],["Jewellery","DYzAwXblbhx"]],
  "Super Markets":[["Supermarket","DfKe7lvEr3W"],["Supermarket","DeRqNi1iAyu"],["Supermarket","DcgN4n-gYSV"],["Supermarket","DYpDgtxgUVP"],["Supermarket","DRW_OaTCc45"],["Supermarket","DaiFhqXl3PL"]],
  "Education Centers":[["Abacus centre","DcdrdgqT_B7"],["Abacus centre","DaAknLckQ5f"],["Computer education","DeyK8wTDVTE"],["Computer education","DW_lK0CiGLP"],["Computer education","DZKgwHaimRr"]],
@@ -109,7 +111,14 @@ const VIDEOS={
  "Real Estate":[["Real estate","DdwM2O7jUP3"],["Real estate","DXg_oAfjQyC"]],
  "Home Appliances & Retail":[["Home appliances","DWd-l14j1h5"],["Home appliances","DbVTWGoFOy6"],["Home appliances","DeJ2jPXj5sI"],["Electronics","DezIAxYjyVg"],["Electronics","De9WeZBjobI"]],
  "Tiles Showroom":[["Tiles showroom","DMxbR3NAzRG"]],
- "School / College":[["School","Df6RnvPvVEs"],["School","DdA7zKqzxMB"],["School","DdeTXbFgO10"],["School","DQeEQp0jDQi"],["School","DPGx0W3gECW"],["College","DLj5ucEAQlb"],["College","DLbrXUTgXEr"],["College","DLCsoBHAQsJ"]]
+ "School / College":[["School","Df6RnvPvVEs"],["School","DdA7zKqzxMB"],["School","DdeTXbFgO10"],["School","DQeEQp0jDQi"],["School","DPGx0W3gECW"],["College","DLj5ucEAQlb"],["College","DLbrXUTgXEr"],["College","DLCsoBHAQsJ"]],
+ "Dental Clinic":[["Dental clinic","DTZhxyXkm9h"],["Dental clinic","DT2nCdKCt5B"],["Dental clinic","DSKIn9Gj69a"],["Dental clinic","DWY1GrzDot2"],["Dental clinic","DYCeRJEEvS4"]],
+ "Electrical Shop":[["Electricals","DKeeTehNSC6"],["Electricals","DOWSEZMjYj_"],["Electricals","DdWTulFD2O9"]],
+ "Bike Showrooms":[["Bike showroom","Df19NtyRubr"],["Bike showroom","De9NtjmgnLe"],["Bike showroom","DeT7P-bEle3"],["Bike showroom","DfXFM-3jCa9"],["Bike showroom","https://www.facebook.com/share/r/1Fkmp1Np12/","reel-fb-bike.jpg"]],
+ "Marriage Halls":[["S S Mahal","DL2N2WfAYCw"],["S S Mahal","DKuDMowy29X"]],
+ "Agriculture Machinery & Equipments":[["Agriculture","DcDQJpUCFjs"]],
+ "Construction":[["Construction","DNDczLLgOxK"],["Construction","DVbHRL3ADS8"]],
+ "Beauty Parlour":[["Beauty parlour","DKwXhUvgNZu"],["Beauty parlour","DUigtTZCTwc"],["Beauty parlour","DS42TP4ANDu"],["Beauty parlour","DYtPi0CxhXz"]]
 };
 const JOBS=[
  ["Video Editor","3 Seats","Premiere Pro, After Effects, DaVinci Resolve, Avid"],
@@ -154,7 +163,7 @@ $('modalX').onclick=closeModal;modal.addEventListener('click',e=>{if(e.target===
 addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 $('indWrap').addEventListener('click',e=>{const b=e.target.closest('.ind');if(!b)return;const d=INDUSTRIES[+b.dataset.i];
  const v=VIDEOS[d[1]]||[];
- openModal(`<div class="em">${ic(d[0])}</div><h3>${d[1]}</h3><p>${d[2]}</p>${v.length?`<p class="mv-title">${igI()} Our work — tap a video to watch</p><div class="reels">${v.map((x,k)=>`<a class="reel" href="${rl(x[1])}" target="_blank" rel="noopener" style="--h:${(k*37)%360}" aria-label="Watch ${x[0]} reel ${k+1} on Instagram"><span class="r-media"><img src="${x[2]||thumbSrc(x[1])}" alt="${x[0]} reel ${k+1}" loading="lazy" onerror="this.remove()"></span><span class="r-shade"></span><span class="r-ig">${igI()}</span><span class="r-play">${ic('play-s')}</span><span class="r-lb"><b>${x[0]}</b>Reel ${k+1}</span></a>`).join('')}</div><a class="ig-all" href="${IG_PROFILE}" target="_blank" rel="noopener">${igI()} See all our work on Instagram ${ic('arrow')}</a>`:d[3].length?`<p style="margin-top:18px;color:var(--text);font-weight:700">Brands we've worked with</p><div class="clients">${d[3].map(c=>`<span>${c}</span>`).join('')}</div>`:`<p style="margin:18px 0 24px">Want to see our results for ${d[1].toLowerCase()}? Ask us on WhatsApp — we'll share campaign reports and ROI proof.</p>`}<a class="btn btn-primary" href="${waLink('Hi Metrozo Ads, I run a '+d[1]+' business. I want to grow with digital marketing.')}" target="_blank" rel="noopener">${wa()} Grow my ${d[1]} business</a>`)});
+ openModal(`<div class="em">${ic(d[0])}</div><h3>${d[1]}</h3><p>${d[2]}</p>${v.length?`<p class="mv-title">${igI()} Our work — tap a video to watch</p><div class="reels">${v.map((x,k)=>`<a class="reel" href="${rl(x[1])}" target="_blank" rel="noopener" style="--h:${(k*37)%360}" aria-label="Watch ${x[0]} reel ${k+1} on ${isFB(x[1])?'Facebook':'Instagram'}"><span class="r-media">${(x[2]||thumbSrc(x[1]))?`<img src="${x[2]||thumbSrc(x[1])}" alt="${x[0]} reel ${k+1}" loading="lazy" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='/api/thumb?id=${encodeURIComponent(x[1])}'}else{this.remove()}">`:''}</span><span class="r-shade"></span><span class="r-ig">${isFB(x[1])?fbI():igI()}</span><span class="r-play">${ic('play-s')}</span><span class="r-lb"><b>${x[0]}</b>Reel ${k+1}</span></a>`).join('')}</div><a class="ig-all" href="${IG_PROFILE}" target="_blank" rel="noopener">${igI()} See all our work on Instagram ${ic('arrow')}</a>`:d[3].length?`<p style="margin-top:18px;color:var(--text);font-weight:700">Brands we've worked with</p><div class="clients">${d[3].map(c=>`<span>${c}</span>`).join('')}</div>`:`<p style="margin:18px 0 24px">Want to see our results for ${d[1].toLowerCase()}? Ask us on WhatsApp — we'll share campaign reports and ROI proof.</p>`}<a class="btn btn-primary" href="${waLink('Hi Metrozo Ads, I run a '+d[1]+' business. I want to grow with digital marketing.')}" target="_blank" rel="noopener">${wa()} Grow my ${d[1]} business</a>`)});
 
 /* ---- SERVICE CHART ---- */
 (function(){

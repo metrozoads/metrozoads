@@ -21,6 +21,14 @@ GITHUB + VERCEL (ippo use pannradhu)
      CNAME www  -> Vercel domain card-la kaatura CNAME value
    Pazhaya A / AAAA records delete pannunga. MX records-a THODAADHEENGA (email).
 
+AUTO THUMBNAILS (api/thumb.js)
+------------------------------
+reel-<ID>.jpg photo illaadha reels-ku website thaane Instagram-la irundhu cover photo edukkum.
+Idhukku GitHub-la "api" folder-kulla "thumb.js" file irukkanum:
+  GitHub -> Add file -> Create new file -> name box-la  api/thumb.js  type pannunga
+  -> indha ZIP-la irukka api/thumb.js-a Notepad-la open panni copy-paste -> Commit.
+Pudhu reel add pannumbodhu main.js-la VIDEOS-la ID mattum podunga podhum – photo thaane varum.
+
 CHANGES PANNA (simple edits)
 ----------------------------
 - Phone / WhatsApp number: main.js -> "const WA='916380650947'" + index.html-la tel: links.
